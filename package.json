@@ -1,0 +1,24 @@
+{
+  "name": "jsonld-sort",
+  "version": "1.0.0-alpha.1",
+  "description": "Sorter of JSON-LD data",
+  "main": "dist/index.js",
+  "source": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roddolf/jsonld-sort.git"
+  },
+  "keywords": [
+    "jsonld",
+    "sorter"
+  ],
+  "author": "Rodolfo Aguirre <aguirreg.rodolfo@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/roddolf/jsonld-sort/issues"
+  },
+  "homepage": "https://github.com/roddolf/jsonld-sort#readme"
+}
