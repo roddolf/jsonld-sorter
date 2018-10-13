@@ -128,3 +128,9 @@ Temporary Items
 
 
 # End of https://www.gitignore.io/api/osx,git,node,visualstudiocode
+
+### Dist files
+dist/
+
+### rollup-plugin-typescript2
+.rpt2_cache/
