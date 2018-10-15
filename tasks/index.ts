@@ -1,3 +1,2 @@
-import { build, bundle } from "./build";
-
-export { build, bundle };
+export { build, bundle } from "./build";
+export { test } from "./tests";

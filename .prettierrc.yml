@@ -4,3 +4,8 @@ singleQuote: false
 trailingComma: all
 bracketSpacing: true
 arrowParens: avoid
+
+overrides
+  - files: "*.{yml,json}"
+    options:
+      tabWidth: 2
