@@ -31,7 +31,7 @@ function sortObject<T extends { [key: string]: any }>(object: T): T {
         .keys(object)
         .sort()
         .forEach(key => {
-            clone[key] ? object[key];
+            clone[key] = object[key];
         });
 
     return clone;
@@ -69,5 +69,5 @@ function getIdentifier(element: any): any {
     if ("@id" in element) return element["@id"];
     if ("@value" in element) return element["@value"];
 
-    return element;
+    return JSON.stringify(element);
 }
