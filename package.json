@@ -1,5 +1,5 @@
 {
-  "name": "jsonld-sort",
+  "name": "jsonld-sorter",
   "version": "1.0.0-alpha.1",
   "description": "Sorter of JSON-LD data",
   "main": "dist/index.js",
