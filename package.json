@@ -4,6 +4,7 @@
   "description": "Sorter of JSON-LD data",
   "main": "dist/index.js",
   "source": "src/index.ts",
+  "bin": "dist/cli.js",
   "scripts": {
     "start": "start build",
     "test": "start test"
@@ -27,10 +28,13 @@
     "@start/plugin": "^0.2.1",
     "@start/plugin-find": "^0.2.1",
     "@start/plugin-lib-jest": "^0.3.1",
+    "@start/plugin-lib-rollup": "^0.1.1",
     "@start/plugin-read": "^0.2.1",
     "@start/plugin-sequence": "^0.2.2",
+    "@start/plugin-write": "^0.2.1",
     "@start/reporter-verbose": "^0.1.0",
     "@types/jest": "^23.3.5",
+    "@types/yargs": "^12.0.1",
     "jest": "^23.6.0",
     "microbundle": "^0.6.0",
     "ts-jest": "^23.10.4",
@@ -38,6 +42,7 @@
   },
   "start": {
     "file": "./tasks",
+    "reporter": "@start/reporter-verbose",
     "require": [
       [
         "ts-node-register",
@@ -46,8 +51,9 @@
           "transpileOnly": true
         }
       ]
-    ],
-    "reporter": "@start/reporter-verbose"
+    ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "yargs": "^12.0.2"
+  }
 }
