@@ -60,3 +60,4 @@ try {
     console.error("Couldn't save the data in '%s'.", target);
     process.exit(1);
 }
+
