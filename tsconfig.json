@@ -9,7 +9,6 @@
   },
   "exclude": [
     "node_modules",
-    "tasks",
-    "src/cli.ts"
+    "tasks"
   ]
 }
