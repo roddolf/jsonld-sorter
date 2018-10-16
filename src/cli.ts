@@ -12,7 +12,7 @@ const argv = yargs
             description: "The JSON-LD file to be ordered",
         })
         .positional("target_file", {
-            description: "File were to store the ordered data",
+            description: "File to store the ordered data",
         })
     )
 
