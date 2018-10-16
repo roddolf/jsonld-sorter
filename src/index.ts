@@ -27,8 +27,7 @@ export function sortJSONLD<T>(object: T): T {
 function sortObject<T extends { [key: string]: any }>(object: T): T {
     const clone: T = {} as T;
 
-    Object
-        .keys(object)
+    Object.keys(object)
         .sort()
         .forEach(key => {
             clone[key] = object[key];
