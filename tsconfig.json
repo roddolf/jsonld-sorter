@@ -4,10 +4,12 @@
     "module": "es2015",
     "strict": true,    
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "outDir": "dist/",
   },
   "exclude": [
     "node_modules",
-    "tasks"
+    "tasks",
+    "src/cli.ts"
   ]
 }
