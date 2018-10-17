@@ -41,7 +41,7 @@ jobs:
       - attach_workspace:
           at: ~/
 
-      - run: npm ci
+      - run: npm run ci
 
 workflows:
   version: 2
