@@ -1,2 +1,2 @@
 export { build, buildDist, buildCLI } from "./build";
-export { test } from "./tests";
+export { test, ci } from "./tests";
