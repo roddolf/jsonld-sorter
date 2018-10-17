@@ -1,13 +1,14 @@
 {
   "name": "jsonld-sorter",
-  "version": "1.0.0-alpha.1",
+  "version": "0.1.0",
   "description": "Sorter of JSON-LD data",
   "main": "dist/index.js",
   "source": "src/index.ts",
   "bin": "dist/cli.js",
   "scripts": {
     "start": "start build",
-    "test": "start test"
+    "test": "start test",
+    "ci": "start ci"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "@start/reporter-verbose": "^0.1.0",
     "@types/jest": "^23.3.5",
     "@types/yargs": "^12.0.1",
+    "coveralls": "^3.0.2",
     "jest": "^23.6.0",
     "microbundle": "^0.6.0",
     "ts-jest": "^23.10.4",
