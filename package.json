@@ -35,12 +35,12 @@
     "@start/plugin-sequence": "^0.2.2",
     "@start/plugin-write": "^0.2.1",
     "@start/reporter-verbose": "^0.1.0",
-    "@types/jest": "^23.3.5",
+    "@types/jest": "^23.3.10",
     "@types/yargs": "^12.0.1",
     "coveralls": "^3.0.2",
     "jest": "^23.6.0",
     "microbundle": "^0.6.0",
-    "ts-jest": "^23.10.4",
+    "ts-jest": "^23.10.5",
     "ts-node-register": "^1.0.0"
   },
   "start": {
@@ -57,6 +57,6 @@
     ]
   },
   "dependencies": {
-    "yargs": "^12.0.2"
+    "yargs": "^12.0.5"
   }
 }
