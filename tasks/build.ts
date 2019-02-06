@@ -5,6 +5,7 @@ import write from "@start/plugin-write";
 import remove from "@start/plugin-remove";
 import microbundle from "./plugins/microbundle";
 import typescript from "./plugins/typescript";
+import { buildDocs } from "./docs";
 
 export const buildDist = () => microbundle({});
 
@@ -21,4 +22,10 @@ export const buildCLI = () =>
     );
 
 export const build = () =>
-    sequence(find("dist/"), remove, buildDist(), buildCLI());
+    sequence(
+        find("dist/"),
+        remove,
+        buildDist(),
+        buildCLI(),
+        buildDocs(),
+    );

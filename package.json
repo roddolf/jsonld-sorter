@@ -8,7 +8,8 @@
   "scripts": {
     "start": "start build",
     "test": "start test",
-    "ci": "start ci"
+    "ci": "start ci",
+    "docs": "start docs"
   },
   "repository": {
     "type": "git",
