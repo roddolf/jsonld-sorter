@@ -2,6 +2,7 @@
     "debug.node.autoAttach": "on",
     "cSpell.words": [
         "microbundle",
-        "sourcemap"
+        "sourcemap",
+        "typedoc"
     ]
 }

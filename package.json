@@ -41,7 +41,8 @@
     "jest": "^23.6.0",
     "microbundle": "^0.6.0",
     "ts-jest": "^23.10.5",
-    "ts-node-register": "^1.0.0"
+    "ts-node-register": "^1.0.0",
+    "typedoc": "^0.14.2"
   },
   "start": {
     "file": "./tasks",

@@ -23,6 +23,9 @@ export function sortJSONLD<T>(object: T): T {
  * Sorts the object keys of a JSONLD object.
  * @param object The object to sort its keys.
  * @returns A copy of the object with the sorted keys.
+ * 
+ * @private
+ * @hidden
  */
 function sortObject<T extends { [key: string]: any }>(object: T): T {
     const clone: T = {} as T;
@@ -40,6 +43,9 @@ function sortObject<T extends { [key: string]: any }>(object: T): T {
  * Sorts an array of a JSONLD object.
  * @param array The array to be sorted.
  * @returns A copy of the sorted array.
+ * 
+ * @private
+ * @hidden
  */
 function sortArray<T extends any[]>(array: T): T {
     return array.sort((a, b) => {
@@ -61,6 +67,9 @@ function sortArray<T extends any[]>(array: T): T {
  *
  * @param element The element to get its identifier.
  * @returns The identifier of the element.
+ * 
+ * @private
+ * @hidden
  */
 function getIdentifier(element: any): any {
     if (typeof element !== "object") return element;

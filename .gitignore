@@ -131,6 +131,7 @@ Temporary Items
 
 ### Dist files
 dist/
+docs/
 
 ### rollup-plugin-typescript2
 .rpt2_cache/
