@@ -82,7 +82,6 @@ workflows:
             tags:
               only: /.*/
             branches:
-              only: /.*/
               ignore:
                 - gh-pages
       - test:
@@ -92,7 +91,6 @@ workflows:
             tags:
               only: /.*/
             branches:
-              only: /.*/
               ignore:
                 - gh-pages
       - publish:
@@ -111,3 +109,4 @@ workflows:
               only: /v[0-9]+(\.[0-9]+)*/
             branches:
               ignore: /.*/
+  
