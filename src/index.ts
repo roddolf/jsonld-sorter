@@ -8,8 +8,8 @@ export function sortJSONLD<T>(object: T): T {
 
     // Sort container
     const sorted: T = Array.isArray(object)
-        ? sortArray(object)
-        : sortObject(object);
+        ? _sortArray(object)
+        : _sortObject(object);
 
     // Sort sub-elements
     for (const index in sorted) {
@@ -26,7 +26,7 @@ export function sortJSONLD<T>(object: T): T {
  * 
  * @private
  */
-function sortObject<T extends { [key: string]: any }>(object: T): T {
+function _sortObject<T extends { [key: string]: any }>(object: T): T {
     const clone: T = {} as T;
 
     Object.keys(object)
@@ -45,10 +45,10 @@ function sortObject<T extends { [key: string]: any }>(object: T): T {
  * 
  * @private
  */
-function sortArray<T extends any[]>(array: T): T {
+function _sortArray<T extends any[]>(array: T): T {
     return array.sort((a, b) => {
-        const identifierA = getIdentifier(a);
-        const identifierB = getIdentifier(b);
+        const identifierA = _getIdentifier(a);
+        const identifierB = _getIdentifier(b);
 
         if (identifierA < identifierB) return -1;
         if (identifierA > identifierB) return 1;
@@ -68,7 +68,7 @@ function sortArray<T extends any[]>(array: T): T {
  * 
  * @private
  */
-function getIdentifier(element: any): any {
+function _getIdentifier(element: any): any {
     if (typeof element !== "object") return element;
 
     if ("@id" in element) return element["@id"];
