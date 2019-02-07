@@ -27,7 +27,7 @@ cp -av .circleci/config.yml gh-pages/.circleci/config.yml
 echo -e "\nDeploy gh-pages branch"
 cd gh-pages
 git add -A
-git commit -m "Circle CI deplayment to GitHub Pages: ${CIRCLE_SHA1}" --allow-empty
+git commit -m "Circle CI deployment to GitHub Pages: ${CIRCLE_SHA1}" --allow-empty
 git push origin gh-pages
 
 # Clean GitHub Pages directory
