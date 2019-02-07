@@ -1,6 +1,6 @@
 common: &common
   docker:
-    - image: circleci/node:7.10
+    - image: circleci/node:9
   working_directory: ~/workspace
 
 version: 2
