@@ -59,8 +59,8 @@ jobs:
 
     steps:
       - add-ssh-keys:
-        fingerprints:
-          - "$DEPLOY_GH_FINGERPRINTS"
+          fingerprints:
+            - "$DEPLOY_GH_FINGERPRINTS"
 
       - attach_workspace:
           at: ~/
