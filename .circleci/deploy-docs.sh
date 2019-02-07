@@ -3,6 +3,10 @@
 # Fail script when any non-zero command
 set -e
 
+# Config GIT
+git config --global user.email "$GH_EMAIL"
+git config --global user.name "$GH_NAME"
+
 # Clone GitHub Pages branch
 git clone --single-branch --branch gh-pages $CIRCLE_REPOSITORY_URL gh-pages
 
