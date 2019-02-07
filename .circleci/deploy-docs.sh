@@ -17,6 +17,9 @@ git rm -rf .
 # Copy docs to GitHub Pages
 cd ..
 cp -a docs/. gh-pages/.
+# Copy Circle CI config
+mkdir -p gh-pages/.circleci
+cp -a .circleci/config.yml gh-pages/.circleci/config.yml
 
 # Publish new GitHub Pages
 cd gh-pages
