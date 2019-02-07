@@ -1,6 +1,6 @@
 {
   "name": "jsonld-sorter",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Sorter of JSON-LD data",
   "main": "dist/index.js",
   "source": "src/index.ts",
