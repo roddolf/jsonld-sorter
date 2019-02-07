@@ -132,6 +132,7 @@ Temporary Items
 ### Dist files
 dist/
 docs/
+gh-pages/
 
 ### rollup-plugin-typescript2
 .rpt2_cache/

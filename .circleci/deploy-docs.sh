@@ -11,22 +11,26 @@ git config --global user.name "$GH_NAME"
 git clone --single-branch --branch gh-pages $CIRCLE_REPOSITORY_URL gh-pages
 
 # Clean GitHub Pages
+echo "\nClean gh-pages directory"
 cd gh-pages
-git rm -rf .
+git rm -rfv .
 
 # Copy docs to GitHub Pages
+echo "\nCopy docs into gh-pages directory"
 cd ..
-cp -a docs/. gh-pages/.
+cp -av docs/. gh-pages/.
 # Copy Circle CI config
 mkdir -p gh-pages/.circleci
-cp -a .circleci/config.yml gh-pages/.circleci/config.yml
+cp -av .circleci/config.yml gh-pages/.circleci/config.yml
 
 # Publish new GitHub Pages
+echo "\nDeploy gh-pages branch"
 cd gh-pages
 git add -A
 git commit -m "Circle CI deplayment to GitHub Pages: ${CIRCLE_SHA1}" --allow-empty
 git push origin gh-pages
 
 # Clean GitHub Pages directory
+echo "\nClean gh-pages directory"
 cd ..
-rm -rf gh-pages
+rm -rfv gh-pages
