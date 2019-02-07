@@ -61,7 +61,6 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "d9:6c:42:7d:2b:f3:e2:9d:ac:fb:4d:0e:72:29:cb:14"
-            - "16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48"
 
       - attach_workspace:
           at: ~/
