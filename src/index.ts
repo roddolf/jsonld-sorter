@@ -25,7 +25,6 @@ export function sortJSONLD<T>(object: T): T {
  * @returns A copy of the object with the sorted keys.
  * 
  * @private
- * @hidden
  */
 function sortObject<T extends { [key: string]: any }>(object: T): T {
     const clone: T = {} as T;
@@ -45,7 +44,6 @@ function sortObject<T extends { [key: string]: any }>(object: T): T {
  * @returns A copy of the sorted array.
  * 
  * @private
- * @hidden
  */
 function sortArray<T extends any[]>(array: T): T {
     return array.sort((a, b) => {
@@ -69,7 +67,6 @@ function sortArray<T extends any[]>(array: T): T {
  * @returns The identifier of the element.
  * 
  * @private
- * @hidden
  */
 function getIdentifier(element: any): any {
     if (typeof element !== "object") return element;
