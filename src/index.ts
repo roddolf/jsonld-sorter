@@ -8,8 +8,8 @@ export function sortJSONLD<T>(object: T): T {
 
     // Sort container
     const sorted: T = Array.isArray(object)
-        ? sortArray(object)
-        : sortObject(object);
+        ? _sortArray(object)
+        : _sortObject(object);
 
     // Sort sub-elements
     for (const index in sorted) {
@@ -23,8 +23,10 @@ export function sortJSONLD<T>(object: T): T {
  * Sorts the object keys of a JSONLD object.
  * @param object The object to sort its keys.
  * @returns A copy of the object with the sorted keys.
+ * 
+ * @private
  */
-function sortObject<T extends { [key: string]: any }>(object: T): T {
+function _sortObject<T extends { [key: string]: any }>(object: T): T {
     const clone: T = {} as T;
 
     Object.keys(object)
@@ -40,11 +42,13 @@ function sortObject<T extends { [key: string]: any }>(object: T): T {
  * Sorts an array of a JSONLD object.
  * @param array The array to be sorted.
  * @returns A copy of the sorted array.
+ * 
+ * @private
  */
-function sortArray<T extends any[]>(array: T): T {
+function _sortArray<T extends any[]>(array: T): T {
     return array.sort((a, b) => {
-        const identifierA = getIdentifier(a);
-        const identifierB = getIdentifier(b);
+        const identifierA = _getIdentifier(a);
+        const identifierB = _getIdentifier(b);
 
         if (identifierA < identifierB) return -1;
         if (identifierA > identifierB) return 1;
@@ -61,8 +65,10 @@ function sortArray<T extends any[]>(array: T): T {
  *
  * @param element The element to get its identifier.
  * @returns The identifier of the element.
+ * 
+ * @private
  */
-function getIdentifier(element: any): any {
+function _getIdentifier(element: any): any {
     if (typeof element !== "object") return element;
 
     if ("@id" in element) return element["@id"];
