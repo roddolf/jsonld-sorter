@@ -15,7 +15,7 @@ export const test = () =>
         ...JEST_YARGS_REQUIRED,
     });
 
-export const ci = () =>
+export const testCI = () =>
     sequence(
         find("coverage"),
         remove,
