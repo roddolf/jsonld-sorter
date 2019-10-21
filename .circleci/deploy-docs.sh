@@ -23,7 +23,7 @@ cp -av docs/* gh-pages
 mkdir -p gh-pages/.circleci
 cp -av .circleci/config.yml gh-pages/.circleci/config.yml
 # Add .nojekyll file
-touch .nojekyll
+touch gh-pages/.nojekyll
 
 # Publish new GitHub Pages
 echo -e "\nDeploy gh-pages branch"

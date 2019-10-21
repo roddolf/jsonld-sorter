@@ -5,13 +5,22 @@ import read from "@start/plugin-read";
 import remove from "@start/plugin-remove";
 import coveralls from "./plugins/coveralls";
 
-export const test = () => jest({});
+const JEST_YARGS_REQUIRED = {
+    _: [],
+    $0: "jest",
+};
+
+export const test = () =>
+    jest({
+        ...JEST_YARGS_REQUIRED,
+    });
 
 export const ci = () =>
     sequence(
         find("coverage"),
         remove,
         jest({
+            ...JEST_YARGS_REQUIRED,
             collectCoverage: true,
             coverageReporters: ["lcov"],
         }),

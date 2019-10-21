@@ -23,7 +23,7 @@ export function sortJSONLD<T>(object: T): T {
  * Sorts the object keys of a JSONLD object.
  * @param object The object to sort its keys.
  * @returns A copy of the object with the sorted keys.
- * 
+ *
  * @private
  */
 function _sortObject<T extends { [key: string]: any }>(object: T): T {
@@ -31,7 +31,7 @@ function _sortObject<T extends { [key: string]: any }>(object: T): T {
 
     Object.keys(object)
         .sort()
-        .forEach(key => {
+        .forEach((key: keyof T) => {
             clone[key] = object[key];
         });
 
@@ -42,7 +42,7 @@ function _sortObject<T extends { [key: string]: any }>(object: T): T {
  * Sorts an array of a JSONLD object.
  * @param array The array to be sorted.
  * @returns A copy of the sorted array.
- * 
+ *
  * @private
  */
 function _sortArray<T extends any[]>(array: T): T {
@@ -65,7 +65,7 @@ function _sortArray<T extends any[]>(array: T): T {
  *
  * @param element The element to get its identifier.
  * @returns The identifier of the element.
- * 
+ *
  * @private
  */
 function _getIdentifier(element: any): any {
