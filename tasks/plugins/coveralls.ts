@@ -1,7 +1,7 @@
-import plugin from "@start/plugin";
+import plugin, { StartDataFilesProps } from "@start/plugin";
 
 export default () =>
-    plugin("coveralls", async ({ files }) => {
+    plugin("coveralls", () => async ({ files }: StartDataFilesProps) => {
         const coveralls = (await import("coveralls")).handleInput;
 
         const sendToCoveralls = (data: string) =>

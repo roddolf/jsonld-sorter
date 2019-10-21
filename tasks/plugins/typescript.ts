@@ -1,4 +1,4 @@
-import plugin, { StartFiles } from "@start/plugin";
+import plugin, { StartDataFile, StartDataFilesProps } from "@start/plugin";
 import { CompilerOptions } from "typescript";
 import * as path from "path";
 import * as fs from "fs";
@@ -12,7 +12,7 @@ export interface Options {
 }
 
 export default (options: Options) =>
-    plugin("typescript", async props => {
+    plugin("typescript", () => async ({ files }: StartDataFilesProps) => {
         const ts = await import("typescript");
 
         function parseOptions(options: object): CompilerOptions {
@@ -29,9 +29,9 @@ export default (options: Options) =>
             const projectOptions = parseOptions(projectJSON.compilerOptions);
 
             targetOptions = Object.assign(projectOptions, targetOptions);
-        } catch (e) {}
+        } catch {}
 
-        const files: StartFiles = props.files.map(file => {
+        const resultFiles: StartDataFile[] = files.map(file => {
             const transpileOutput = ts.transpileModule(file.data, {
                 fileName: file.path,
                 compilerOptions: targetOptions,
@@ -47,6 +47,6 @@ export default (options: Options) =>
         });
 
         return {
-            files,
+            files: resultFiles,
         };
     });

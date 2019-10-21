@@ -1,9 +1,9 @@
-import plugin, { StartFiles } from "@start/plugin";
-import { Application } from "typedoc";
+import plugin, { StartFilesProps } from "@start/plugin";
 
 interface Options {
     out: string;
     mode?: "file" | "modules";
+    tsconfig: string;
     json?: string;
     exclude?: string;
     includeDeclarations?: boolean;
@@ -30,27 +30,25 @@ interface Options {
 
 const PLUGIN_NAME = "typedoc";
 export default (options: Options) =>
-    plugin(PLUGIN_NAME, async ({ files, reporter }) => {
-        const appOptions = {
+    plugin(PLUGIN_NAME, () => async ({ files }: StartFilesProps) => {
+        const { Application } = await import("typedoc");
+        const app = new Application({
             ...options,
             out: null,
             json: null,
-        };
-        const app = new Application(appOptions);
+        });
 
         const src = files.map(_ => _.path);
         const project = app.convert(src);
 
         if (!project) {
-            reporter.emit("error", PLUGIN_NAME, "Failed to generate TypeDoc project.");
-            return;
+            throw "Failed to generate TypeDoc project";
         }
 
         if (options.out) app.generateDocs(project, options.out);
         if (options.json) app.generateJson(project, options.json);
 
         if (app.logger.hasErrors()) {
-            reporter.emit("error", PLUGIN_NAME, "Error generating TypeDoc output.");
-            return;
+            throw "Error generating TypeDoc output";
         }
     });

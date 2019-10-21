@@ -6,9 +6,8 @@ export const buildDocs = () =>
     sequence(
         find(["src/*.ts", "!src/cli.ts", "!src/*.spec.ts"]),
         typedoc({
-            target: "es5",
-            module: "es2015",
-            
+            tsconfig: "./tsconfig.json",
+
             out: "docs/",
             mode: "modules",
             version: true,

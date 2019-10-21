@@ -7,18 +7,20 @@ import * as yargs from "yargs";
 import { sortJSONLD } from ".";
 
 const argv = yargs
-    .usage("$0 <file> [target_file] [options]", "Sort the LD-Data provided.", _ => _
-        .positional("file", {
-            description: "The JSON-LD file to be ordered",
-        })
-        .positional("target_file", {
-            description: "File to store the ordered data",
-        })
-    )
+    .usage("$0 <file> [target_file] [options]", "Sort the LD-Data provided.")
 
     .version()
     .alias("v", "version")
     .alias("h", "help")
+
+    .positional("file", {
+        type: "string",
+        description: "The JSON-LD file to be ordered",
+    })
+    .positional("target_file", {
+        type: "string",
+        description: "File to store the ordered data",
+    })
 
     .option("self", {
         alias: "s",
@@ -36,7 +38,7 @@ if (!argv.self && !argv.target_file) {
 
 const workDirectory: string = process.cwd();
 
-const file: string = path.resolve(workDirectory, argv.file);
+const file: string = path.resolve(workDirectory, argv.file!);
 let fileJSON: object;
 try {
     const fileString: string = fs.readFileSync(file, "utf8");
@@ -51,7 +53,7 @@ const newJSON = sortJSONLD(fileJSON!);
 const newString = JSON.stringify(newJSON, null, 2);
 
 const target: string = !argv.self
-    ? path.resolve(workDirectory, argv.target_file)
+    ? path.resolve(workDirectory, argv.target_file!)
     : file;
 try {
     fs.writeFileSync(target, newString);

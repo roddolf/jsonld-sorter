@@ -22,10 +22,4 @@ export const buildCLI = () =>
     );
 
 export const build = () =>
-    sequence(
-        find("dist/"),
-        remove,
-        buildDist(),
-        buildCLI(),
-        buildDocs(),
-    );
+    sequence(find("dist/"), remove, buildDist(), buildCLI(), buildDocs());

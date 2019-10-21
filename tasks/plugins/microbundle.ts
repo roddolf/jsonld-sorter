@@ -1,7 +1,7 @@
 import plugin from "@start/plugin";
 
-export default (options?: {}) =>
-    plugin("microbundle", async props => {
+export default (options: {} = {}) =>
+    plugin("microbundle", props => async () => {
         const microbundle = (await import("microbundle")).default;
         try {
             const output = await microbundle({
@@ -15,6 +15,6 @@ export default (options?: {}) =>
             });
             props.logMessage(output);
         } catch (e) {
-            props.logMessage(e);
+            throw e.message;
         }
     });
