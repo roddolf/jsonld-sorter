@@ -30,14 +30,14 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm ci
       - run: npm run build:src
-      - run: |
-          NPM_TAG="latest"
-          echo ${GITHUB_REF/refs\/tags\//}
-          if [[ ${GITHUB_REF/refs\/tags\//} =~ ^v.*-[a-zA-Z]+\.[0-9]+$ ]]; then
-          	NPM_TAG="next"
-          fi
-
-          npm publish --tag ${NPM_TAG}
+      - name: Publish latest
+        if: ! contains(github.ref, '-')
+        run: npm publish --tag latest
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Publish next
+        if: contains(github.ref, '-')
+        run: npm publish --tag next
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
@@ -53,14 +53,14 @@ jobs:
           scope: "@roddolf"
       - run: npm ci
       - run: npm run build:src
-      - run: |
-          NPM_TAG="latest"
-          echo ${GITHUB_REF/refs\/tags\//}
-          if [[ ${GITHUB_REF/refs\/tags\//} =~ ^v.*-[a-zA-Z]+\.[0-9]+$ ]]; then
-          	NPM_TAG="next"
-          fi
-
-          npm publish --tag ${NPM_TAG}
+      - name: Publish latest
+        if: ! contains(github.ref, '-')
+        run: npm publish --tag latest
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Publish next
+        if: contains(github.ref, '-')
+        run: npm publish --tag next
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
