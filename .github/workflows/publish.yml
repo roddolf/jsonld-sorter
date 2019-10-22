@@ -1,4 +1,4 @@
-name: Node.js Package
+name: Node Publish
 
 on:
   release:
@@ -30,7 +30,14 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm ci
       - run: npm run build:src
-      - run: npm publish
+      - run: |
+          NPM_TAG="latest"
+          echo ${GITHUB_REF/refs\/tags\//}
+          if [[ ${GITHUB_REF/refs\/tags\//} =~ ^v.*-[a-zA-Z]+\.[0-9]+$ ]]; then
+          	NPM_TAG="next"
+          fi
+
+          npm publish --tag ${NPM_TAG}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
@@ -46,13 +53,21 @@ jobs:
           scope: "@roddolf"
       - run: npm ci
       - run: npm run build:src
-      - run: npm publish
+      - run: |
+          NPM_TAG="latest"
+          echo ${GITHUB_REF/refs\/tags\//}
+          if [[ ${GITHUB_REF/refs\/tags\//} =~ ^v.*-[a-zA-Z]+\.[0-9]+$ ]]; then
+          	NPM_TAG="next"
+          fi
+
+          npm publish --tag ${NPM_TAG}
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
   publish-docs:
     needs: [publish-npm, publish-gpr]
     runs-on: ubuntu-latest
+    if: !contains(github.ref, '-')
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
