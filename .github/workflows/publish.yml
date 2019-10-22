@@ -65,9 +65,9 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
   publish-docs:
+    if: ! contains(github.ref, '-')
     needs: [publish-npm, publish-gpr]
     runs-on: ubuntu-latest
-    if: !contains(github.ref, '-')
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
