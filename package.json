@@ -14,7 +14,7 @@
     "build": "npm-run-all build:*",
     "build:src": "start buildDist && start buildCLI",
     "build:docs": "start buildDocs",
-    "test": "if [[ ${CI} ]]; then npm run test:ci; else npm run test:dev; fi",
+    "test": "if [ \"$CI\" ]; then npm run test:ci; else npm run test:dev; fi",
     "test:dev": "start test",
     "test:ci": "start testCI"
   },
