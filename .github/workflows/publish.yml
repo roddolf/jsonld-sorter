@@ -31,7 +31,7 @@ jobs:
       - run: npm ci
       - run: npm run build:src
       - name: Publish latest
-        if: ! contains(github.ref, '-')
+        if: "!contains(github.ref, '-')"
         run: npm publish --tag latest
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
@@ -54,7 +54,7 @@ jobs:
       - run: npm ci
       - run: npm run build:src
       - name: Publish latest
-        if: ! contains(github.ref, '-')
+        if: "!contains(github.ref, '-')"
         run: npm publish --tag latest
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -65,7 +65,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
   publish-docs:
-    if: ! contains(github.ref, '-')
+    if: "!contains(github.ref, '-')"
     needs: [publish-npm, publish-gpr]
     runs-on: ubuntu-latest
     steps:
