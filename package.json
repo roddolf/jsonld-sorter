@@ -10,13 +10,13 @@
   "unpkg": "dist/index.umd.js",
   "bin": "dist/cli.js",
   "scripts": {
-    "start": "npm run build",
+    "start": "node node_modules/@start/cli/node/index.js",
     "build": "npm-run-all build:*",
-    "build:src": "start buildDist && start buildCLI",
-    "build:docs": "start buildDocs",
+    "build:src": "npm run start -- buildDist && npm run start -- buildCLI",
+    "build:docs": "npm run start -- buildDocs",
     "test": "if [ \"$CI\" ]; then npm run test:ci; else npm run test:dev; fi",
-    "test:dev": "start test",
-    "test:ci": "start testCI",
+    "test:dev": "npm run start -- test",
+    "test:ci": "npm run start -- testCI",
     "release": "standard-version"
   },
   "repository": {
