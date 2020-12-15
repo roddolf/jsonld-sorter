@@ -14,7 +14,7 @@
     "build": "npm-run-all build:*",
     "build:src": "npm run start -- buildDist && npm run start -- buildCLI",
     "build:docs": "npm run start -- buildDocs",
-    "test": "if [ \"$CI\" ]; then npm run test:ci; else npm run test:dev; fi",
+    "test": "if-env CI=true && npm run test:ci || npm run test:dev",
     "test:dev": "npm run start -- test",
     "test:ci": "npm run start -- testCI",
     "release": "standard-version"
@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/roddolf/jsonld-sort#readme",
   "devDependencies": {
+    "@delucis/if-env": "^1.1.2",
     "@start/cli": "^2.0.0",
     "@start/plugin": "^2.0.0",
     "@start/plugin-find": "^2.0.0",
