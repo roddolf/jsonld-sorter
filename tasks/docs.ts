@@ -9,7 +9,7 @@ export const buildDocs = () =>
             tsconfig: "./tsconfig.json",
 
             out: "docs/",
-            mode: "modules",
+            mode: "file",
             version: true,
             excludePrivate: true,
             excludeProtected: true,

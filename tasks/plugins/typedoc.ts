@@ -1,42 +1,24 @@
 import plugin, { StartFilesProps } from "@start/plugin";
+import type { TypeDocAndTSOptions } from "typedoc";
 
-interface Options {
+interface Options extends Partial<TypeDocAndTSOptions> {
     out: string;
-    mode?: "file" | "modules";
-    tsconfig: string;
-    json?: string;
-    exclude?: string;
-    includeDeclarations?: boolean;
-    externalPattern?: string;
-    excludeExternals?: boolean;
-    excludePrivate?: boolean;
-    excludeProtected?: boolean;
-    module?: string;
-    target?: string;
-    theme?: string;
-    name?: string;
-    readme?: string;
-    plugins?: string[];
-    hideGenerator?: boolean;
-    gaID?: string;
-    gaSite?: string;
-    entryPoint?: string;
-    gitRevision?: string;
-    includes?: string;
-    media?: string;
-    verbose?: boolean;
-    version?: boolean;
 }
 
 const PLUGIN_NAME = "typedoc";
 export default (options: Options) =>
     plugin(PLUGIN_NAME, () => async ({ files }: StartFilesProps) => {
-        const { Application } = await import("typedoc");
-        const app = new Application({
+        const appOptions = {
             ...options,
             out: null,
             json: null,
-        });
+        };
+
+        const { Application,TSConfigReader, TypeDocReader } = await import("typedoc");
+        const app = new Application();
+        app.options.addReader(new TSConfigReader());
+        app.options.addReader(new TypeDocReader());
+        app.bootstrap(appOptions);
 
         const src = files.map(_ => _.path);
         const project = app.convert(src);
