@@ -29,7 +29,7 @@ const argv = yargs
         description: "Store data in the same file",
     })
 
-    .argv; // prettier-ignore
+    .parseSync(); // prettier-ignore
 
 if (!argv.self && !argv.target_file) {
     console.error("A target file, or the --self frag is required.");
