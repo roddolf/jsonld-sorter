@@ -2,9 +2,10 @@ import plugin from "@start/plugin";
 
 export default (options: {} = {}) =>
     plugin("microbundle", utils => async () => {
+        // @ts-ignore
         const microbundle = (await import("microbundle")).default;
         try {
-            const output = await microbundle({
+            await microbundle({
                 format: "es,cjs,umd",
                 watch: false,
                 target: "node",
@@ -14,6 +15,8 @@ export default (options: {} = {}) =>
                 ...options,
             });
         } catch (e) {
-            throw e.message;
+            throw e instanceof Error
+                ? e.message
+                : e;
         }
     });
