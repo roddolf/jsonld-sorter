@@ -1,5 +1,5 @@
 import plugin, { StartDataFile, StartDataFilesProps } from "@start/plugin";
-import { CompilerOptions } from "typescript";
+import type { CompilerOptions } from "typescript";
 import * as path from "path";
 import * as fs from "fs";
 
