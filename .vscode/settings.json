@@ -1,6 +1,7 @@
 {
     "debug.node.autoAttach": "on",
     "cSpell.words": [
+        "JSONLD",
         "microbundle",
         "sourcemap",
         "typedoc"
