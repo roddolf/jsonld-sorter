@@ -1,28 +1,26 @@
 import plugin, { StartFilesProps } from "@start/plugin";
-import type { TypeDocAndTSOptions } from "typedoc";
+import type { TypeDocOptions } from "typedoc";
 
-interface Options extends Partial<TypeDocAndTSOptions> {
+interface Options extends Partial<TypeDocOptions> {
     out: string;
 }
 
 const PLUGIN_NAME = "typedoc";
 export default (options: Options) =>
     plugin(PLUGIN_NAME, () => async ({ files }: StartFilesProps) => {
-        const appOptions = {
-            ...options,
-            out: null,
-            json: null,
-        };
-
-        const { Application,TSConfigReader, TypeDocReader } = await import("typedoc");
+        const { Application, TSConfigReader, TypeDocReader } = await import("typedoc");
         const app = new Application();
         app.options.addReader(new TSConfigReader());
         app.options.addReader(new TypeDocReader());
-        app.bootstrap(appOptions);
+        app.bootstrap({
+            ...options,
+            out: undefined,
+            json: undefined,
+            entryPoints: files.map(_ => _.path),
+            entryPointStrategy: "Resolve",
+        });
 
-        const src = files.map(_ => _.path);
-        const project = app.convert(src);
-
+        const project = app.convert();
         if (!project) {
             throw "Failed to generate TypeDoc project";
         }
