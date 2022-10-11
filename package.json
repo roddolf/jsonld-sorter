@@ -38,7 +38,6 @@
     "@start/cli": "^2.0.1",
     "@start/plugin": "^2.0.0",
     "@start/plugin-find": "^2.0.0",
-    "@start/plugin-lib-jest": "^3.0.0",
     "@start/plugin-lib-rollup": "^3.0.0",
     "@start/plugin-read": "^2.0.0",
     "@start/plugin-remove": "^2.0.0",
