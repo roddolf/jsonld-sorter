@@ -14,6 +14,7 @@
     "build": "npm-run-all build:*",
     "build:src": "npm run start -- buildDist && npm run start -- buildCLI",
     "build:docs": "npm run start -- buildDocs",
+    "build:tasks": "tsc --project tasks/tsconfig.json --noEmit",
     "test": "if-env CI=true && npm run test:ci || npm run test:dev",
     "test:dev": "npm run start -- test",
     "test:ci": "npm run start -- testCI",
