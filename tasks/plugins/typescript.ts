@@ -1,7 +1,7 @@
 import plugin, { StartDataFile, StartDataFilesProps } from "@start/plugin";
-import type { CompilerOptions } from "typescript";
-import * as path from "path";
 import * as fs from "fs";
+import * as path from "path";
+import { CompilerOptions } from "typescript";
 
 export interface Options {
     module?: "commonjs";
@@ -9,6 +9,15 @@ export interface Options {
     sourceRoot?: string;
     outDir?: string;
     [option: string]: any;
+}
+
+declare module "typescript" {
+    export interface EmitResult {
+        sourceMaps?: Array<{
+            inputSourceFileNames: SourceFile[];
+            sourceMap: {};
+        }>
+    }
 }
 
 export default (options: Options) =>
@@ -29,22 +38,37 @@ export default (options: Options) =>
             const projectOptions = parseOptions(projectJSON.compilerOptions);
 
             targetOptions = Object.assign(projectOptions, targetOptions);
-        } catch {}
+        } catch { }
 
-        const resultFiles: StartDataFile[] = files.map(file => {
-            const transpileOutput = ts.transpileModule(file.data, {
-                fileName: file.path,
-                compilerOptions: targetOptions,
+        const fileNames = files.map(x => x.path);
+        const program = ts.createProgram(fileNames, targetOptions);
+
+        // TODO: report errors
+        const allDiagnostics = ts.getPreEmitDiagnostics(program);
+        // .concat(emitResult.diagnostics);
+
+        const fileNamesSet = new Set(fileNames);
+        const targetSourceFiles = program.getSourceFiles()
+            .filter(x => fileNamesSet.has(x.fileName));
+
+        const resultFiles: StartDataFile[] = [];
+        for (const sourceFile of targetSourceFiles) {
+            const resultFile: StartDataFile = {
+                path: sourceFile.fileName,
+                data: '',
+            };
+
+            // Emit JS file and add result
+            const emitResult = program.emit(sourceFile, (fileName, contents) => {
+                if (!fileName.endsWith('.js')) return;
+                resultFile.data = contents;
             });
 
-            return {
-                path: file.path.replace(/\.ts$/, ".js"),
-                data: transpileOutput.outputText,
-                map: transpileOutput.sourceMapText
-                    ? JSON.parse(transpileOutput.sourceMapText)
-                    : null,
-            };
-        });
+            // Add map result
+            resultFile.map = emitResult.sourceMaps?.[0]?.sourceMap;
+
+            resultFiles.push(resultFile);
+        }
 
         return {
             files: resultFiles,
