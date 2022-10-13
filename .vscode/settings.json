@@ -1,6 +1,7 @@
 {
     "debug.node.autoAttach": "on",
     "cSpell.words": [
+        "delucis",
         "JSONLD",
         "microbundle",
         "sourcemap",

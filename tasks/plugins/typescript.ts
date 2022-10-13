@@ -1,7 +1,5 @@
 import plugin, { StartDataFile, StartDataFilesProps } from "@start/plugin";
-import * as fs from "fs";
-import * as path from "path";
-import { CompilerOptions } from "typescript";
+import type { CompilerOptions, Diagnostic, ParseConfigFileHost } from "typescript";
 
 export interface Options {
     module?: "commonjs";
@@ -20,40 +18,75 @@ declare module "typescript" {
     }
 }
 
+
 export default (options: Options) =>
     plugin("typescript", () => async ({ files }: StartDataFilesProps) => {
         const ts = await import("typescript");
 
-        function parseOptions(options: object): CompilerOptions {
-            const root: string = process.cwd();
-            return ts.convertCompilerOptionsFromJson(options, root).options;
+
+        function parseDiagnostics(diagnostics: readonly Diagnostic[]): string {
+            const errors = diagnostics.map(diagnostic => {
+                const message = ts.flattenDiagnosticMessageText(diagnostic.messageText, ts.sys.newLine);
+                if (!diagnostic.file || diagnostic.start === undefined) return (message);
+
+                const { line, character } = ts.getLineAndCharacterOfPosition(diagnostic.file, diagnostic.start);
+                return `${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`;
+            });
+
+            return `\n${errors.join('\n')}`;
         }
 
-        // Extend project options
-        let targetOptions: CompilerOptions = parseOptions(options);
-        try {
-            const configPath = path.resolve(process.cwd(), "tsconfig.json");
-            const projectJSON = JSON.parse(fs.readFileSync(configPath, "utf8"));
-            const projectOptions = parseOptions(projectJSON.compilerOptions);
+        function parsePluginOptions(): CompilerOptions {
+            const root: string = process.cwd();
+            const parsingResults = ts.convertCompilerOptionsFromJson(options, root, 'options');
 
-            targetOptions = Object.assign(projectOptions, targetOptions);
-        } catch { }
+            if (parsingResults.errors.length) {
+                const errorMessage = parseDiagnostics(parsingResults.errors);
+                throw errorMessage;
+            }
 
+            return parsingResults.options;
+        }
+
+        function parseAllOptions(): CompilerOptions {
+            const pluginOptions = parsePluginOptions();
+
+            const root: string = process.cwd();
+            const configPath = ts.findConfigFile(root, ts.sys.fileExists, "tsconfig.json");
+            if (!configPath) return pluginOptions;
+
+
+            const host: ParseConfigFileHost = {
+                ...ts.sys,
+                onUnRecoverableConfigFileDiagnostic: diagnostic => {
+                    const errorMessage = parseDiagnostics([diagnostic]);
+                    throw errorMessage;
+                }
+            };
+
+            const parsingResults = ts.getParsedCommandLineOfConfigFile(configPath, pluginOptions, host);
+            if (!parsingResults) return pluginOptions;
+
+            if (parsingResults.errors.length) {
+                const errorMessage = parseDiagnostics(parsingResults.errors);
+                throw errorMessage;
+            }
+
+            return parsingResults.options;
+        }
+
+        
+        // Create the TS program
         const fileNames = files.map(x => x.path);
-        const program = ts.createProgram(fileNames, targetOptions);
+        const parsedOptions = parseAllOptions();
+        const program = ts.createProgram(fileNames, parsedOptions);
 
         // Check if any error
-        const errors = ts
-            .getPreEmitDiagnostics(program)
-            .map(diagnostic => {
-                const message = ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n");
-                if (!diagnostic.file) return (message);
-
-                const { line, character } = ts.getLineAndCharacterOfPosition(diagnostic.file, diagnostic.start!);
-                return (`${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`);
-            })
-            .join('');
-        if (errors.length) return Promise.reject('\n' + errors);
+        const programErrors = ts.getPreEmitDiagnostics(program)
+        if (programErrors.length) {
+            const errorMessage = parseDiagnostics(programErrors);
+            throw errorMessage;
+        }
 
         const fileNamesSet = new Set(fileNames);
         const targetSourceFiles = program.getSourceFiles()
