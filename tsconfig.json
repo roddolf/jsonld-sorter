@@ -1,7 +1,7 @@
 {
-  "extends": "@tsconfig/node14/tsconfig.json",
+  "extends": "@tsconfig/node12/tsconfig.json",
   "compilerOptions": {
-    "module": "es2020",
+    "module": "esnext",
     "strict": true,
     "outDir": "dist/",
     "sourceMap": true,
