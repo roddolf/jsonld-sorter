@@ -29,9 +29,8 @@ export default (options: Options) =>
             return ts.convertCompilerOptionsFromJson(options, root).options;
         }
 
-        let targetOptions: CompilerOptions = parseOptions(options);
-
         // Extend project options
+        let targetOptions: CompilerOptions = parseOptions(options);
         try {
             const configPath = path.resolve(process.cwd(), "tsconfig.json");
             const projectJSON = JSON.parse(fs.readFileSync(configPath, "utf8"));
@@ -43,9 +42,18 @@ export default (options: Options) =>
         const fileNames = files.map(x => x.path);
         const program = ts.createProgram(fileNames, targetOptions);
 
-        // TODO: report errors
-        const allDiagnostics = ts.getPreEmitDiagnostics(program);
-        // .concat(emitResult.diagnostics);
+        // Check if any error
+        const errors = ts
+            .getPreEmitDiagnostics(program)
+            .map(diagnostic => {
+                const message = ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n");
+                if (!diagnostic.file) return (message);
+
+                const { line, character } = ts.getLineAndCharacterOfPosition(diagnostic.file, diagnostic.start!);
+                return (`${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`);
+            })
+            .join('');
+        if (errors.length) return Promise.reject('\n' + errors);
 
         const fileNamesSet = new Set(fileNames);
         const targetSourceFiles = program.getSourceFiles()
@@ -53,20 +61,20 @@ export default (options: Options) =>
 
         const resultFiles: StartDataFile[] = [];
         for (const sourceFile of targetSourceFiles) {
-            const resultFile: StartDataFile = {
-                path: sourceFile.fileName,
-                data: '',
-            };
+            let resultFile: StartDataFile | undefined;
 
-            // Emit JS file and add result
+            // Emit JS file and create result
             const emitResult = program.emit(sourceFile, (fileName, contents) => {
                 if (!fileName.endsWith('.js')) return;
-                resultFile.data = contents;
+                resultFile = {
+                    path: fileName,
+                    data: contents,
+                };
             });
+            if (!resultFile) continue;
 
             // Add map result
             resultFile.map = emitResult.sourceMaps?.[0]?.sourceMap;
-
             resultFiles.push(resultFile);
         }
 
