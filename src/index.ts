@@ -26,12 +26,14 @@ export function sortJSONLD<T>(object: T): T {
  *
  * @private
  */
-function _sortObject<T extends { [key: string]: any }>(object: T): T {
-    const clone: T = {} as T;
+function _sortObject<T extends { [key: string]: any } | null>(object: T): T {
+    if (!object) return object;
+
+    const clone: T = {} as typeof object;
 
     Object.keys(object)
         .sort()
-        .forEach((key: keyof T) => {
+        .forEach(key => {
             clone[key] = object[key];
         });
 

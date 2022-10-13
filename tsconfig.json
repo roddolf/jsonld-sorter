@@ -1,15 +1,13 @@
 {
+  "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
-    "target": "es5",
-    "module": "es2015",
-    "strict": true,    
-    "moduleResolution": "node",
-    "esModuleInterop": true,
+    "module": "esnext",
+    "strict": true,
     "outDir": "dist/",
-    "sourceMap": true
+    "sourceMap": true,
   },
   "exclude": [
     "node_modules",
-    "tasks"
+    "tasks",
   ]
 }

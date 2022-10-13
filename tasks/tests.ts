@@ -1,26 +1,18 @@
-import sequence from "@start/plugin-sequence";
-import jest from "@start/plugin-lib-jest";
 import find from "@start/plugin-find";
 import read from "@start/plugin-read";
 import remove from "@start/plugin-remove";
+import sequence from "@start/plugin-sequence";
 import coveralls from "./plugins/coveralls";
-
-const JEST_YARGS_REQUIRED = {
-    _: [],
-    $0: "jest",
-};
+import jest from "./plugins/jest";
 
 export const test = () =>
-    jest({
-        ...JEST_YARGS_REQUIRED,
-    });
+    jest();
 
 export const testCI = () =>
     sequence(
         find("coverage"),
         remove,
         jest({
-            ...JEST_YARGS_REQUIRED,
             collectCoverage: true,
             coverageReporters: ["lcov"],
         }),
