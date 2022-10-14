@@ -8,7 +8,7 @@ import jest from "./plugins/jest";
 export const test = () =>
     jest();
 
-export const testCI = () =>
+export const testCoverage = () =>
     sequence(
         find("coverage"),
         remove,
@@ -16,6 +16,11 @@ export const testCI = () =>
             collectCoverage: true,
             coverageReporters: ["lcov"],
         }),
+    );
+
+export const testCoveralls = () =>
+    sequence(
+        testCoverage(),
         find("coverage/lcov.info"),
         read,
         coveralls(),
