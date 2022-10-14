@@ -1,5 +1,4 @@
 import find from "@start/plugin-find";
-import read from "@start/plugin-read";
 import remove from "@start/plugin-remove";
 import sequence from "@start/plugin-sequence";
 import jest from "./plugins/jest";

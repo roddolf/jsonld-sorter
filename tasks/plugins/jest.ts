@@ -19,6 +19,7 @@ export default (argv?: JestArgv) =>
         }, projects);
 
         if (
+            !result.results.success ||
             result.results.numFailedTests > 0 ||
             result.results.numFailedTestSuites > 0 ||
             result.results.numTotalTests === 0
