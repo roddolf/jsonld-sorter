@@ -1,6 +1,12 @@
 import { sortJSONLD } from "./index";
 
 describe("sortJSONLD", () => {
+
+    test("should return null", () => {
+        const returned = sortJSONLD(null);
+        expect(returned).toBe(null);
+    });
+
     test("should return number", () => {
         const returned = sortJSONLD(10);
         expect(returned).toBe(10);

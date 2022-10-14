@@ -1,3 +1,3 @@
-export { build, buildDist, buildCLI } from "./build";
+export { build, buildCLI, buildDist } from "./build";
 export { buildDocs } from "./docs";
-export { test, testCI } from "./tests";
+export { test, testCoverage } from "./tests";
