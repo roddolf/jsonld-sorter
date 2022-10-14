@@ -14,6 +14,13 @@ export const testCoverage = () =>
         remove,
         jest({
             collectCoverage: true,
+            coverageThreshold: JSON.stringify({
+                global: {
+                    branches: 90,
+                    functions: 90,
+                    lines: 90,
+                },
+            }),
             coverageReporters: ["lcov"],
         }),
     );
