@@ -1,6 +1,6 @@
 import { sortJSONLD } from "./index";
 
-describe("sortJSONLD", () => {
+xdescribe("sortJSONLD", () => {
     test("should return number", () => {
         const returned = sortJSONLD(10);
         expect(returned).toBe(10);
