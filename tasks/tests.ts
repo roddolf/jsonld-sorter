@@ -2,7 +2,6 @@ import find from "@start/plugin-find";
 import read from "@start/plugin-read";
 import remove from "@start/plugin-remove";
 import sequence from "@start/plugin-sequence";
-import coveralls from "./plugins/coveralls";
 import jest from "./plugins/jest";
 
 export const test = () =>
@@ -23,12 +22,4 @@ export const testCoverage = () =>
             }),
             coverageReporters: ["lcov"],
         }),
-    );
-
-export const testCoveralls = () =>
-    sequence(
-        testCoverage(),
-        find("coverage/lcov.info"),
-        read,
-        coveralls(),
     );
