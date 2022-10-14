@@ -24,20 +24,12 @@ jobs:
 
       - run: npm run test:coverage
 
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          flag-name: node-${{ matrix.node-version }}
-          parallel: true
-
-  finish:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Coveralls Finished
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          parallel-finished: true
+          token: ${{ secrets.CODECOV_TOKEN }}
+          name: codecov-umbrella
+          flags: unittests
+          directory: ./coverage
+          fail_ci_if_error: true
+          verbose: true
