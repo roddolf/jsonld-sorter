@@ -7,4 +7,4 @@
 
 Sort JSON-LD objects comparing by `@id` or `@value` if exists.
 
-**Support**: Node.js 14.x and above
+**Support**: Node.js 16.x and above

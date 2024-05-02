@@ -21,7 +21,7 @@ declare module "typescript" {
 
 export default (options: Options) =>
     plugin("typescript", () => async ({ files }: StartDataFilesProps) => {
-        const ts = await import("typescript");
+        const ts = (await import("typescript")).default;
 
 
         function parseDiagnostics(diagnostics: readonly Diagnostic[]): string {

@@ -9,18 +9,17 @@ const PLUGIN_NAME = "typedoc";
 export default (options: Options) =>
     plugin(PLUGIN_NAME, () => async ({ files }: StartFilesProps) => {
         const { Application, TSConfigReader, TypeDocReader } = await import("typedoc");
-        const app = new Application();
-        app.options.addReader(new TSConfigReader());
-        app.options.addReader(new TypeDocReader());
-        app.bootstrap({
+        const app = await Application.bootstrap({
             ...options,
             out: undefined,
             json: undefined,
             entryPoints: files.map(_ => _.path),
             entryPointStrategy: "Resolve",
         });
+        app.options.addReader(new TSConfigReader());
+        app.options.addReader(new TypeDocReader());
 
-        const project = app.convert();
+        const project = await app.convert();
         if (!project) {
             throw "Failed to generate TypeDoc project";
         }

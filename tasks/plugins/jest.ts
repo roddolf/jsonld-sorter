@@ -10,7 +10,7 @@ const JEST_ARGS_REQUIRED: Arguments = {
 
 export default (argv?: JestArgv) =>
     plugin('jest', () => async () => {
-        const { runCLI } = await import('jest');
+        const { runCLI } = (await import('jest')).default;
         const projects = argv?.projects ?? [argv?.rootDir ?? process.cwd()];
 
         const result = await runCLI({
