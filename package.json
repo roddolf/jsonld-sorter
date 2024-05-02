@@ -49,7 +49,7 @@
     "@start/plugin-sequence": "^2.0.0",
     "@start/plugin-write": "^2.0.1",
     "@start/reporter-verbose": "^2.0.1",
-    "@tsconfig/node14": "^1.0.3",
+    "@tsconfig/node16": "^16.1.3",
     "@types/jest": "^29.1.2",
     "@types/yargs": "^17.0.13",
     "cross-env": "^7.0.3",
