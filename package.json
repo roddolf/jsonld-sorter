@@ -77,7 +77,7 @@
     ]
   },
   "dependencies": {
-    "yargs": "^17.6.0"
+    "yargs": "^18.0.0"
   },
   "files": [
     "dist"
