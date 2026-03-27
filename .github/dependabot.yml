@@ -19,15 +19,14 @@ updates:
     open-pull-requests-limit: 5
 
     groups:
-      ts-dependencies:
-        patterns:
-          - "typescript"
-          - "typedoc"
-          - "ts-*"
-          - "microbundle"
-          - "jest"
-          - "@types/jest"
-          - "@tsconfig/*"
+      dev-deps:
+        dependency-type: "development"
+        exclude-patterns:
+          - "@start/*"
+          - "@types/yargs"
+      prod-deps:
+        dependency-type: "production"
+
       start-dependencies:
         patterns:
           - "@start/*"
