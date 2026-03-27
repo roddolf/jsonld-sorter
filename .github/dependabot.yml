@@ -28,8 +28,6 @@ updates:
         exclude-patterns:
           - "@start/*"
           - "@types/yargs"
-      prod-deps:
-        dependency-type: "production"
 
       start-dependencies:
         patterns:
