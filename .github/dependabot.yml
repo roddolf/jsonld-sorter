@@ -24,6 +24,10 @@ updates:
           - "typescript"
           - "typedoc"
           - "ts-*"
+          - "microbundle"
+          - "jest"
+          - "@types/jest"
+          - "@tsconfig/*"
       start-dependencies:
         patterns:
           - "@start/*"
