@@ -37,40 +37,10 @@ jobs:
       - run: npm run build:src
       - name: Publish latest
         if: "!contains(github.ref, '-')"
-        run: npm publish --provenance --tag latest
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-      - name: Publish next
-        if: contains(github.ref, '-')
-        run: npm publish --provenance --tag next
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-
-  publish-gpr:
-    if: false
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 22
-          registry-url: https://npm.pkg.github.com/
-          scope: "@roddolf"
-      - run: npm ci
-      - run: npm run build:src
-      - name: Publish latest
-        if: "!contains(github.ref, '-')"
         run: npm publish --tag latest
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Publish next
         if: contains(github.ref, '-')
         run: npm publish --tag next
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
   publish-docs:
     if: "!contains(github.ref, '-')"
