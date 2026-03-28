@@ -26,9 +26,4 @@ updates:
       dev-deps:
         dependency-type: "development"
         exclude-patterns:
-          - "@start/*"
           - "@types/yargs"
-
-      start-dependencies:
-        patterns:
-          - "@start/*"
