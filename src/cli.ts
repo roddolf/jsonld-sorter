@@ -64,6 +64,6 @@ export function sortJSONLDFile(args: string[] = process.argv.slice(2)): void {
 }
 
 /* c8 ignore next -- entry point guard */
-if (!process.env["VITEST"]) {
+if (import.meta.env?.MODE !== "test") {
     sortJSONLDFile();
 }
