@@ -8,4 +8,7 @@
         "sourcemap",
         "typedoc"
     ],
+    "json.schemaDownload.trustedDomains": {
+        "https://raw.githubusercontent.com/googleapis/release-please/": true
+    },
 }
