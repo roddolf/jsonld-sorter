@@ -1,13 +1,11 @@
 {
-  "extends": "@tsconfig/node16/tsconfig.json",
+  "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
-    "module": "esnext",
     "strict": true,
     "outDir": "dist/",
     "sourceMap": true,
+    "declaration": true
   },
-  "exclude": [
-    "node_modules",
-    "tasks",
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }
