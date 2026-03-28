@@ -5,9 +5,8 @@
     "strict": true,
     "outDir": "dist/",
     "sourceMap": true,
+    "declaration": true
   },
-  "exclude": [
-    "node_modules",
-    "tasks",
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }
