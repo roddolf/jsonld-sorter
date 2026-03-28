@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.5](https://github.com/roddolf/jsonld-sorter/compare/v0.2.4...v0.2.5) (2026-03-28)
+
+
+### Bug Fixes
+
+* correct repository metadata and migrate to npm trusted publishing ([#129](https://github.com/roddolf/jsonld-sorter/issues/129)) ([2b11714](https://github.com/roddolf/jsonld-sorter/commit/2b117147e60d084da2438da69bc73f0b9b0e54ed))
+
 ### [0.2.4](https://github.com/roddolf/jsonld-sorter/compare/v0.2.1...v0.2.4) (2022-10-14)
 
 
