@@ -35,7 +35,7 @@ jobs:
           node-version: 22
           registry-url: https://registry.npmjs.org/
       - run: npm ci
-      - run: npm run build
+      - run: npm run build:src
       - run: npm run test
       - name: Publish latest
         if: "!contains(needs.release-please.outputs.tag_name, '-')"
