@@ -1,10 +1,11 @@
 {
     "debug.node.autoAttach": "on",
+    "js/ts.tsdk.path": "node_modules/typescript/lib",
     "cSpell.words": [
         "delucis",
         "JSONLD",
         "microbundle",
         "sourcemap",
         "typedoc"
-    ]
+    ],
 }
