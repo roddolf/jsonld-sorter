@@ -22,8 +22,7 @@
     "build:src": "tsup",
     "build:docs": "typedoc src/index.ts",
     "test": "vitest run",
-    "test:coverage": "vitest run --coverage",
-    "release": "standard-version"
+    "test:coverage": "vitest run --coverage"
   },
   "repository": {
     "type": "git",
@@ -46,7 +45,6 @@
     "@vitest/coverage-v8": "^4.1.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.2.5",
-    "standard-version": "^9.5.0",
     "tsup": "^8.5.1",
     "typedoc": "^0.28.18",
     "typescript": "~6.0",
