@@ -64,7 +64,7 @@ export function sortJSONLDFile(args: string[] = process.argv.slice(2)): void {
     }
 }
 
-/* c8 ignore next -- entry point guard */
+/* v8 ignore next 3 -- entry point guard */
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
     sortJSONLDFile();
 }
