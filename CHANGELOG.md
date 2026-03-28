@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.8](https://github.com/roddolf/jsonld-sorter/compare/v0.2.7...v0.2.8) (2026-03-28)
+
+
+### Bug Fixes
+
+* use Node 24 for publish job to get npm &gt;= 11.5.1 ([#135](https://github.com/roddolf/jsonld-sorter/issues/135)) ([bb2cf17](https://github.com/roddolf/jsonld-sorter/commit/bb2cf17692a846a8728f60f090adf450b2b094fa))
+
 ## [0.2.7](https://github.com/roddolf/jsonld-sorter/compare/v0.2.6...v0.2.7) (2026-03-28)
 
 
