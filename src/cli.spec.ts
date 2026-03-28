@@ -2,7 +2,7 @@ import { describe, test, expect, vi, beforeEach } from "vitest";
 import * as fs from "fs";
 import * as path from "path";
 
-import { sortJSONLDFile } from "./cli";
+import { sortJSONLDFile } from "./cli.js";
 
 vi.mock("fs");
 

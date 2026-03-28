@@ -1,8 +1,9 @@
 import * as fs from "fs";
 import * as path from "path";
+import { pathToFileURL } from "node:url";
 import yargs from "yargs";
 
-import { sortJSONLD } from ".";
+import { sortJSONLD } from "./index.js";
 
 export function sortJSONLDFile(args: string[] = process.argv.slice(2)): void {
     const argv = yargs(args)
@@ -64,6 +65,6 @@ export function sortJSONLDFile(args: string[] = process.argv.slice(2)): void {
 }
 
 /* c8 ignore next -- entry point guard */
-if (import.meta.env?.MODE !== "test") {
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
     sortJSONLDFile();
 }
