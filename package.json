@@ -16,7 +16,9 @@
       "require": "./dist/index.cjs"
     }
   },
-  "bin": "dist/cli.js",
+  "bin": {
+    "jsonld-sorter": "dist/cli.js"
+  },
   "scripts": {
     "build": "npm-run-all build:*",
     "build:src": "tsup",
