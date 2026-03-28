@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.7](https://github.com/roddolf/jsonld-sorter/compare/v0.2.6...v0.2.7) (2026-03-28)
+
+
+### Bug Fixes
+
+* pin Node 22.14 for trusted publishing, fix bin field and changelog ([#133](https://github.com/roddolf/jsonld-sorter/issues/133)) ([597c8da](https://github.com/roddolf/jsonld-sorter/commit/597c8dabf4693f6d4c8f8a8089877501d7b0d5fb))
+
 ## [0.2.6](https://github.com/roddolf/jsonld-sorter/compare/v0.2.4...v0.2.6) (2026-03-28)
 
 ### Bug Fixes
