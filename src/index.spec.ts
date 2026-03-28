@@ -1,7 +1,7 @@
+import { describe, test, expect } from "vitest";
 import { sortJSONLD } from "./index";
 
 describe("sortJSONLD", () => {
-
     test("should return null", () => {
         const returned = sortJSONLD(null);
         expect(returned).toBe(null);
