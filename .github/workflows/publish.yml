@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
-          node-version: 18
+          node-version: 22
       - run: npm ci
       - run: npm run build
       - run: npm run test
@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
-          node-version: 18
+          node-version: 22
           registry-url: https://registry.npmjs.org/
       - run: npm ci
       - run: npm run build:src
@@ -48,7 +48,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
-          node-version: 18
+          node-version: 22
           registry-url: https://npm.pkg.github.com/
           scope: "@roddolf"
       - run: npm ci
@@ -72,7 +72,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
-          node-version: 18
+          node-version: 22
       - run: npm ci
       - run: npm run build:docs
       - name: Deploy GitHub Pages
