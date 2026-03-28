@@ -26,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/roddolf/jsonld-sort.git"
+    "url": "git+https://github.com/roddolf/jsonld-sorter.git"
   },
   "keywords": [
     "jsonld",
@@ -35,9 +35,9 @@
   "author": "Rodolfo Aguirre <aguirreg.rodolfo@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/roddolf/jsonld-sort/issues"
+    "url": "https://github.com/roddolf/jsonld-sorter/issues"
   },
-  "homepage": "https://github.com/roddolf/jsonld-sort#readme",
+  "homepage": "https://github.com/roddolf/jsonld-sorter#readme",
   "devDependencies": {
     "@tsconfig/node20": "^20.1.9",
     "@types/node": "^25.5.0",
