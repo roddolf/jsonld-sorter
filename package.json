@@ -50,7 +50,7 @@
     "tsup": "^8.5.1",
     "typedoc": "^0.28.18",
     "typescript": "~6.0",
-    "vitest": "^4.1.2"
+    "vitest": "^5.0.3"
   },
   "dependencies": {
     "yargs": "^18.0.0"
